@@ -52,13 +52,13 @@
 // |  BT0  |  !  |  @  |  {  |  }  |  |  |                   |  UP  |   7   |  8    |  9   |   *   |  F12  |
 // |  BT1  |  #  |  $  |  (  |  )  |  `  |                   | DOWN |   4   |  5    |  6   |   +   |       |
 // |  BT2  |  %  |  ^  |  [  |  ]  |  ~  |        |  |       |   &  |   1   |  2    |  3   |   \   |       |
-//               |     |     |     |     |        |  |       |      |   .   |  0    |  =   |
+//               |  _  |  -  |     |     |        |  |       |      |   .   |  0    |  =   |
             bindings = <
-&bt BT_CLR   &kp F1    &kp F2      &kp F3    &kp F4    &kp F5                        &kp F6    &kp F7    &kp F8    &kp F9    &kp F10   &kp F11
-&bt BT_SEL 0 &kp EXCL  &kp AT      &kp LBRC  &kp RBRC  &kp PIPE                      &kp UP    &kp N7    &kp N8    &kp N9    &kp STAR  &kp F12
-&bt BT_SEL 1 &kp HASH  &kp DOLLAR  &kp LPAR  &kp RPAR  &kp GRAVE                     &kp DOWN  &kp N4    &kp N5    &kp N6    &kp PLUS  &trans
-&out OUT_TOG &kp PRCNT &kp CARET   &kp LBKT  &kp RBKT  &kp TILDE  &trans   &trans    &kp AMPS  &kp N1    &kp N2    &kp N4    &kp BSLH  &trans
-                       &trans      &trans    &trans    &trans     &trans   &trans    &trans    &kp DOT   &kp N0    &kp EQUAL
+&bt BT_CLR    &kp F1           &kp F2           &kp F3    &kp F4    &kp F5                        &kp F6    &kp F7    &kp F8    &kp F9        &kp F10   &kp F11
+&bt BT_SEL 0  &kp EXCL         &kp AT           &kp LBRC  &kp RBRC  &kp PIPE                      &kp UP    &kp N7    &kp N8    &kp N9        &kp STAR  &kp F12
+&bt BT_SEL 1  &kp HASH         &kp DOLLAR       &kp LPAR  &kp RPAR  &kp GRAVE                     &kp DOWN  &kp N4    &kp N5    &kp N6        &kp PLUS  &trans
+&out OUT_TOG  &bhm LCTRL PRCNT &bhm LALT CARET  &kp LBKT  &kp RBKT  &kp TILDE  &trans   &trans    &kp AMPS  &kp N1    &kp N2    &bhm RALT N4  &bhm RCTRL BSLH  &trans
+                               &kp UNDER        &kp MINUS &trans    &trans     &trans   &trans    &trans    &kp DOT   &kp N0    &kp EQUAL
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &inc_dec_kp C_VOL_DN C_VOL_UP>;
