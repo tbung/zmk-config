@@ -1,5 +1,6 @@
-ZMK_DIR := ${HOME}/Projects/zmk
-ZMK_CONFIG_DIR := $(abspath .)
+BASE_DIR := ${HOME}/Projects
+ZMK_DIR := ${BASE_DIR}/zmk
+ZMK_CONFIG_DIR := ${BASE_DIR}/zmk-config
 BUILD_DIR := $(ZMK_CONFIG_DIR)/build
 
 $(info ZMK_DIR: ${ZMK_DIR})
