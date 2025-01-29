@@ -11,7 +11,7 @@ all: $(BUILD_DIR)/splitkb_aurora_sofle_left.uf2 $(BUILD_DIR)/splitkb_aurora_sofl
 
 $(BUILD_DIR)/splitkb_aurora_sofle_%.uf2: config/splitkb_aurora_sofle.conf config/splitkb_aurora_sofle.keymap
 	mkdir -p $(BUILD_DIR)/$*
-	cd $(ZMK_DIR)/app && west build -d ${BUILD_DIR}/$* -b nice_nano_v2 -- -DSHIELD=splitkb_aurora_sofle_$* -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES=${ZMK_CONFIG_DIR}
+	cd $(ZMK_DIR)/app && west build -d ${BUILD_DIR}/$* -b nice_nano_v2 -- -DSHIELD="splitkb_aurora_sofle_$* nice_view_p8 nice_view" -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="${ZMK_CONFIG_DIR}"
 	mv $(BUILD_DIR)/$*/zephyr/zmk.uf2 $(BUILD_DIR)/splitkb_aurora_sofle_$*.uf2
 
 .PHONY: clean

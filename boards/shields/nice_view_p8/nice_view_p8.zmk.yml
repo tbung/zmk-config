@@ -1,0 +1,6 @@
+file_format: "1"
+id: nice_view_p8
+name: nice!view pin8
+type: shield
+requires: [i2c_oled]
+exposes: [nice_view_header]
