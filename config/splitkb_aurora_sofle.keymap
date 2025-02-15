@@ -28,16 +28,18 @@
             bindings = <&kp>, <&kp>;
         };
         wbs: word_backspace {
-            compatible = "zmk,behavior-tap-dance";
+            compatible = "zmk,behavior-adaptive-key";
             #binding-cells = <0>;
-            tapping-term-ms = <180>;
-            bindings = <&kp BSPC>, <&kp LC(BSPC)>;
+            bindings = <&kp BSPC>;
+
+            bs { trigger-keys = <BSPC>; max-prior-idle-ms = <180>; bindings = <&kp LC(BSPC)>; };
         };
         wbs_macos: word_backspace_macos {
-            compatible = "zmk,behavior-tap-dance";
+            compatible = "zmk,behavior-adaptive-key";
             #binding-cells = <0>;
-            tapping-term-ms = <180>;
-            bindings = <&kp BSPC>, <&kp LA(BSPC)>;
+            bindings = <&kp BSPC>;
+
+            bs { trigger-keys = <BSPC>; max-prior-idle-ms = <180>; bindings = <&kp LA(BSPC)>; };
         };
         msc: mouse_scroll {
             compatible = "zmk,behavior-input-two-axis";
