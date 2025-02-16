@@ -1,0 +1,9 @@
+parse_config:
+
+  raw_binding_map:
+    "&wbs":
+      tap: BSPC
+      hold: adaptive
+    "&wbs_macos":
+      tap: BSPC
+      hold: adaptive
