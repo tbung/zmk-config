@@ -13,9 +13,9 @@ $(BUILD_DIR)/splitkb_aurora_sofle_%.uf2: config/splitkb_aurora_sofle.conf config
 	mkdir -p $(BUILD_DIR)/$*
 	cd $(ZMK_DIR)/app && \
 		west build -d ${BUILD_DIR}/$* -b nice_nano_v2 -- \
-		-DSHIELD="splitkb_aurora_sofle_$* nice_view_p8 nice_view_gem" \
+		-DSHIELD="splitkb_aurora_sofle_$* nice_view_p8 nice_view_poke" \
 		-DZMK_CONFIG=${ZMK_CONFIG_DIR}/config \
-		-DZMK_EXTRA_MODULES="${ZMK_CONFIG_DIR};${BASE_DIR}/nice-view-gem;${BASE_DIR}/zmk-adaptive-key" \
+		-DZMK_EXTRA_MODULES="${ZMK_CONFIG_DIR};${BASE_DIR}/zmk-adaptive-key" \
 		-DCMAKE_EXPORT_COMPILE_COMMANDS=1
 	mv $(BUILD_DIR)/$*/zephyr/zmk.uf2 $(BUILD_DIR)/splitkb_aurora_sofle_$*.uf2
 
