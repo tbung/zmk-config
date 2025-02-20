@@ -13,9 +13,13 @@
 #include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/pointing.h>
 
-#define LAYER_MACOS 1
-#define LAYER_SYMBOLS 2
-#define LAYER_MISC 3
+#define L_MACOS 1
+#define L_SYMB 2
+#define L_MISC 3
+
+#define _____ trans
+#define WBS wbs LSHIFT 0
+#define WBSM wbsm LSHIFT 0
 
 / {
     behaviors {
@@ -27,19 +31,35 @@
             flavor = "balanced";
             bindings = <&kp>, <&kp>;
         };
-        wbs: word_backspace {
+        wb: word_backspace {
             compatible = "zmk,behavior-adaptive-key";
             #binding-cells = <0>;
             bindings = <&kp BSPC>;
 
             bs { trigger-keys = <BSPC>; max-prior-idle-ms = <180>; bindings = <&kp LC(BSPC)>; };
         };
-        wbs_macos: word_backspace_macos {
+        wbm: word_backspace_macos {
             compatible = "zmk,behavior-adaptive-key";
             #binding-cells = <0>;
             bindings = <&kp BSPC>;
 
             bs { trigger-keys = <BSPC>; max-prior-idle-ms = <180>; bindings = <&kp LA(BSPC)>; };
+        };
+        wbs: word_backspace_shift {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <0>;
+            flavor = "balanced";
+            bindings = <&kp>, <&wb>;
+        };
+        wbsm: word_backspace_shift_macos {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <0>;
+            flavor = "balanced";
+            bindings = <&kp>, <&wbm>;
         };
         msc: mouse_scroll {
             compatible = "zmk,behavior-input-two-axis";
@@ -68,11 +88,11 @@
 // | SHIFT    | Z/Ctrl | X/LAlt | C    | V     | B     |        |  |     | N     | M  | ,    | ./RAlt | //Ctrl | RSHIFT  |
 //                     | Lower  | Left | Right | SPACE | BSPACE |  | Tab | Enter | Up | Down | Lower  |
             bindings = <
-&kp EQUAL     &kp N1        &kp N2             &kp N3   &kp N4    &kp N5                                             &kp N6   &kp N7  &kp N8     &kp N9         &kp N0           &kp MINUS
-&kp DEL       &kp Q         &kp W              &kp E    &kp R     &kp T                                              &kp Y    &kp U   &kp I      &kp O          &kp P            &kp BSLH
-&mt LCMD ESC  &kp A         &kp S              &kp D    &kp F     &kp G                                              &kp H    &kp J   &kp K      &kp L          &kp SEMI         &mt LCMD SQT
-&kp LSHFT     &bhm LCTRL Z  &bhm LALT X        &kp C    &kp V     &kp B                &kp C_MUTE  &kp C_PLAY_PAUSE  &kp N    &kp M   &kp COMMA  &bhm RALT DOT  &bhm RCTRL FSLH  &kp RSHFT
-                            &mo LAYER_SYMBOLS  &kp LEFT &kp RIGHT &lt LAYER_MISC SPACE &wbs        &kp TAB           &kp RET  &kp UP  &kp DOWN   &mo LAYER_SYMBOLS
+&kp EQUAL  &kp N1        &kp N2    &kp N3         &kp N4     &kp N5                                            &kp N6          &kp N7  &kp N8         &kp N9    &kp N0           &kp MINUS
+&kp DEL    &kp Q         &kp W     &kp E          &kp R      &kp T                                             &kp Y           &kp U   &kp I          &kp O     &kp P            &kp BSLH
+&kp ESC    &kp A         &kp S     &kp D          &kp F      &kp G                                             &kp H           &kp J   &kp K          &kp L     &kp SEMI         &kp SQT
+&kp LSHFT  &bhm LCTRL Z  &kp X     &kp C          &kp V      &kp B             &kp C_MUTE    &kp C_PLAY_PAUSE  &kp N           &kp M   &kp COMMA      &kp DOT   &bhm RCTRL FSLH  &kp RSHFT
+                         &kp LCMD  &mt LALT LEFT  &kp RIGHT  &lt L_MISC SPACE  &WBS          &bhm LSHFT TAB    &lt L_SYMB RET  &kp UP  &mt RALT DOWN  &kp LCMD
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &enc_scrl>;
@@ -81,11 +101,11 @@
         macos_layer {
             display-name = "macos";
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans  &trans
-                &trans  &trans  &trans  &trans  &wbs_macos  &trans  &trans  &trans  &trans  &trans
+&_____  &_____  &_____  &_____  &_____  &_____                      &_____  &_____  &_____  &_____  &_____  &_____
+&_____  &_____  &_____  &_____  &_____  &_____                      &_____  &_____  &_____  &_____  &_____  &_____
+&_____  &_____  &_____  &_____  &_____  &_____                      &_____  &_____  &_____  &_____  &_____  &_____
+&_____  &_____  &_____  &_____  &_____  &_____  &_____      &_____  &_____  &_____  &_____  &_____  &_____  &_____
+                &_____  &_____  &_____  &_____  &WBSM       &_____  &_____  &_____  &_____  &_____
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &enc_scrl>;
@@ -94,17 +114,17 @@
         symbols_layer {
             display-name = "symbols";
 // ---------------------------------------------------------------------------------------------------------
-// | BTCLR |  F1 |  F2 |  F3 |  F4 |  F5 |                   |  F6  |  F7   |  F8   |  F9  |  F10  |  F11  |
-// |  BT0  |  !  |  @  |  {  |  }  |  |  |                   |  UP  |   7   |  8    |  9   |   *   |  F12  |
-// |  BT1  |  #  |  $  |  (  |  )  |  `  |                   | DOWN |   4   |  5    |  6   |   +   |       |
-// |  BT2  |  %  |  ^  |  [  |  ]  |  ~  |        |  |       |   &  |   1   |  2    |  3   |   \   |       |
-//               |     |  _  |  -  |     |        |  |       |      |   .   |  0    |  =   |
+// |     |  F1 |  F2 |  F3 |  F4 |  F5 |                   |  F6  |  F7   |  F8   |  F9  |  F10  |  F11  |
+// |     |  !  |  {  |  }  |  @  |  %  |                   |      |       |       |      |       |  F12  |
+// |  *  |  +  |  (  |  )  |  =  |  `  |                   |      |       |       |      |       |       |
+// |  #  |  &  |  [  |  ]  |  ^  |  ~  |        |  |       |      |       |       |      |       |       |
+//             |  _  |  -  |  $  |     |        |  |       |      |       |       |      |
             bindings = <
-&bt BT_CLR    &kp F1           &kp F2           &kp F3    &kp F4    &kp F5                        &kp F6    &kp F7    &kp F8    &kp F9        &kp F10   &kp F11
-&bt BT_SEL 0  &kp EXCL         &kp AT           &kp LBRC  &kp RBRC  &kp PIPE                      &kp UP    &kp N7    &kp N8    &kp N9        &kp STAR  &kp F12
-&bt BT_SEL 1  &kp HASH         &kp DOLLAR       &kp LPAR  &kp RPAR  &kp GRAVE                     &kp DOWN  &kp N4    &kp N5    &kp N6        &kp PLUS  &trans
-&out OUT_TOG  &bhm LCTRL PRCNT &bhm LALT CARET  &kp LBKT  &kp RBKT  &kp TILDE  &trans   &trans    &kp AMPS  &kp N1    &kp N2    &bhm RALT N4  &bhm RCTRL BSLH  &trans
-                               &trans           &kp UNDER &kp MINUS &trans     &trans   &trans    &trans    &kp DOT   &kp N0    &kp EQUAL
+&_____    &kp F1    &kp F2     &kp F3     &kp F4     &kp F5                         &kp F6  &kp F7  &kp F8  &kp F9  &kp F10  &kp F11
+&_____    &kp EXCL  &kp LBRC   &kp RBRC   &kp AT     &kp PRCNT                      &_____  &_____  &_____  &_____  &_____   &kp F12
+&kp STAR  &kp PLUS  &kp LPAR   &kp RPAR   &kp EQUAL  &kp GRAVE                      &_____  &_____  &_____  &_____  &_____   &_____
+&kp HASH  &kp AMPS  &kp LBKT   &kp RBKT   &kp CARET  &kp TILDE  &_____    &_____    &_____  &_____  &_____  &_____  &_____   &_____
+                    &kp UNDER  &kp MINUS  &kp DLLR   &_____     &_____    &_____    &_____  &_____  &_____  &_____
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &enc_scrl>;
@@ -119,11 +139,11 @@
 // |   F7  |  F8 |  F9 |  F10 |  F11 |  F12 |        |  |       |  +   |   -   |   =   |  [   |   ]   |   \   |
 //               |     |      |      |      |        |  |       |      |       |       |      |
             bindings = <
-&ext_power EP_ON  &trans  &trans  &trans  &trans  &trans                     &trans          &trans          &trans        &trans           &trans  &ext_power EP_OFF
-&trans  &trans  &trans  &trans  &trans  &trans                     &trans          &trans          &trans        &trans           &trans  &trans 
-&trans  &trans  &trans  &trans  &trans  &trans                     &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans     &trans          &trans          &trans        &trans           &trans  &trans
-                &tog LAYER_MACOS  &trans  &trans  &trans  &trans  &mkp LCLK  &mkp RCLK       &mkp MCLK       &trans        &trans
+&bt BT_CLR    &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                       &_____          &_____          &_____        &_____           &_____  &ext_power EP_TOG
+&out OUT_TOG  &_____        &_____        &_____        &_____        &_____                             &_____          &_____          &_____        &_____           &_____  &_____
+&_____        &_____        &_____        &_____        &_____        &_____                             &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT  &_____  &_____
+&tog L_MACOS  &kp LC(Z)     &kp LS(DEL)   &kp LC(INS)   &kp LS(INS)   &_____        &_____    &_____     &_____          &_____          &_____        &_____           &_____  &_____
+                            &_____        &_____        &_____        &_____        &_____    &mkp LCLK  &mkp RCLK       &mkp MCLK       &_____        &_____
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &enc_scrl>;
