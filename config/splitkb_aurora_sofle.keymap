@@ -16,6 +16,7 @@
 #define L_MACOS 1
 #define L_SYMB 2
 #define L_MISC 3
+#define L_MACOS_MISC 4
 
 #define _____ trans
 #define WBS wbs LSHIFT 0
@@ -172,6 +173,27 @@
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &enc_scrl>;
+        };
+
+        macos_misc_layer {
+            display-name = "macos-misc";
+            bindings = <
+&_____  &_____     &_____     &_____     &_____     &_____                      &_____  &_____  &_____  &_____  &_____  &_____
+&_____  &_____     &_____     &_____     &_____     &_____                      &_____  &_____  &_____  &_____  &_____  &_____
+&_____  &_____     &_____     &_____     &_____     &_____                      &_____  &_____  &_____  &_____  &_____  &_____
+&_____  &kp LG(Z)  &kp LG(X)  &kp LG(C)  &kp LG(V)  &_____  &_____      &_____  &_____  &_____  &_____  &_____  &_____  &_____
+                   &_____     &_____     &_____     &_____  &_____      &_____  &_____  &_____  &_____  &_____
+            >;
+
+            sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &enc_scrl>;
+        };
+    };
+
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+        tri_layer {
+            if-layers = <L_MACOS L_MISC>;
+            then-layer = <L_MACOS_MISC>;
         };
     };
 };
